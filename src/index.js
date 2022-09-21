@@ -1,7 +1,17 @@
+require('dotenv').config();
+const mongoose = require('mongoose');
 const express = require('express');
+
 const app = express();
 
+app.use(express.json());
+
 const port =  process.env.PORT || 3000;
+
+const testee = process.env.TEST;
+const db_user = process.env.DB_USER;
+const db_pass = process.env.DB_PASSWORD;
+//encodeURIComponent(
 
 const {
   scrapNumJogos,
@@ -63,20 +73,47 @@ app.get('/add', async (req, res) => {
       }
     }
 
+    //escrever isso no DB agora
     await res.json(dados);
-    
 
-    //await scrapingSoccerStats()
-    //code here
-    //await res.json({nJogos: numJogos});
   } catch (error) {
     res.json(error)
   }
 
 })
 
+app.post('/del',(req, res) => {
+  //criar rote que deleta o conteudo do DB
+})
+
+app.get('/find',(req,res) => {
+  //criar rota que carrega os dados do DB
+})
+
 app.get('/', (req, res)=>{
+  console.log(testee);
+  console.log(db_user);
+  console.log(db_pass);
+
   res.send("Hello World! 22");
 })
 
-app.listen(port);
+
+mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
+.then(()=>{
+    console.log("Conectamos!!!");
+    app.listen(port);
+  }).catch((error)=>{
+    console.log(error);
+  })
+/*
+mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
+.then(() => {
+    console.log('conectamos!');
+  })
+  .catch((error) => {
+    console.log('ERRO:');
+    console.log(error);
+  })
+  */
+
