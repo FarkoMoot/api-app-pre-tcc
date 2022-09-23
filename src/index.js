@@ -8,7 +8,6 @@ app.use(express.json());
 
 const port =  process.env.PORT || 3000;
 
-const testee = process.env.TEST;
 const db_user = process.env.DB_USER;
 const db_pass = encodeURIComponent(process.env.DB_PASSWORD);
 
@@ -25,7 +24,7 @@ const {
 } = require('./scrapMain.js');
 //const scrapingSoccerStats = require('./scrapMain.js');
 
-app.get('/add', async (req, res) => {
+app.post('/add', async (req, res) => {
   try {
     var dados = [];
     var dados1, dados2, dados3, dados4, dados5, dados6, dados7, dados8;
@@ -85,12 +84,12 @@ app.post('/del',(req, res) => {
   //criar rote que deleta o conteudo do DB
 })
 
-app.get('/find',(req,res) => {
+app.get('/find',async (req,res) => {
   //criar rota que carrega os dados do DB
   try {
     
     
-    res.status(200).json(games);
+    res.status(200).json();
 
   } catch (error) {
     res.status(500).json({error: error})
@@ -98,7 +97,6 @@ app.get('/find',(req,res) => {
 })
 
 app.get('/', (req, res)=>{
-  console.log(db_pass);
   res.send("Hello World!");
 })
 
