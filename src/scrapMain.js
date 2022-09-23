@@ -30,7 +30,10 @@ async function scrapNumJogos() {
 }
 
 async function scrapingSoccerStats_1() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
 
@@ -83,7 +86,10 @@ async function scrapingSoccerStats_1() {
 }
 
 async function scrapingSoccerStats_2() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
 
@@ -114,7 +120,10 @@ async function scrapingSoccerStats_2() {
 }
 
 async function scrapingSoccerStats_3() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
 
@@ -145,7 +154,10 @@ async function scrapingSoccerStats_3() {
 }
 
 async function scrapingSoccerStats_4() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
 
@@ -176,7 +188,10 @@ async function scrapingSoccerStats_4() {
 }
 
 async function scrapingSoccerStats_5() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
 
@@ -207,7 +222,10 @@ async function scrapingSoccerStats_5() {
 }
 
 async function scrapingSoccerStats_6() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
 
@@ -238,7 +256,10 @@ async function scrapingSoccerStats_6() {
 }
 
 async function scrapingSoccerStats_7() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
 
@@ -269,7 +290,10 @@ async function scrapingSoccerStats_7() {
 }
 
 async function scrapingSoccerStats_8() {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
 
