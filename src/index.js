@@ -73,9 +73,11 @@ app.post('/add', async (req, res) => {
 
     //escrever isso no DB agora
     await res.json(dados);
+    console.log('deu certo');
 
   } catch (error) {
-    res.json(error)
+    res.json(error);
+    console.log("error");
   }
 
 })
