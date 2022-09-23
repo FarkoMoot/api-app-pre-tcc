@@ -24,18 +24,21 @@ async function scrapNumJogos() {
   }); 
   
   //console.log(infoPreScraping.numJogos);
-  await browser.close();
+
+  
+  //await browser.close();
   return infoPreScraping.numJogos;
 
 }
 
 async function scrapingSoccerStats_1() {
-  const browser = await puppeteer.launch({
+  /**const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox']
   });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
+  **/
 
   await page.waitForSelector('#btable');
 
