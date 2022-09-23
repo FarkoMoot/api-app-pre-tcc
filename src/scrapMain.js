@@ -4,12 +4,13 @@ const BASE_URL = "https://www.soccerstats.com/latest.asp?league=brazil"
 
 
 async function scrapNumJogos() {
-  
+  console.log('step99');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(BASE_URL);
   
   await page.waitForSelector('#btable');
+  console.log('step100');
   const infoPreScraping = await page.evaluate( () => {
     return {
       //pega o numero de children do table que estao os jogos

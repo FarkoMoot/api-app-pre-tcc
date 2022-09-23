@@ -28,11 +28,12 @@ app.post('/add', async (req, res) => {
   try {
     var dados = [];
     var dados1, dados2, dados3, dados4, dados5, dados6, dados7, dados8;
-    
+    console.log('step1');
     const numJogos = await scrapNumJogos();
-
+    console.log('step2');
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
+        console.log('step3');
         dados1 = await scrapingSoccerStats_1();
       }else if( c == 2){
         dados2 = await scrapingSoccerStats_2();
