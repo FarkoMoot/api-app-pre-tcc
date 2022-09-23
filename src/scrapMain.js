@@ -6,9 +6,11 @@ const BASE_URL = "https://www.soccerstats.com/latest.asp?league=brazil"
 async function scrapNumJogos() {
   console.log('step99');
   const browser = await puppeteer.launch();
+  console.log('step999');
   const page = await browser.newPage();
+  console.log('step9999');
   await page.goto(BASE_URL);
-  
+  console.log('step99999');
   await page.waitForSelector('#btable');
   console.log('step100');
   const infoPreScraping = await page.evaluate( () => {
