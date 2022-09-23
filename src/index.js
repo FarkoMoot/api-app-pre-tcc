@@ -98,6 +98,7 @@ app.get('/find',(req,res) => {
 })
 
 app.get('/', (req, res)=>{
+  console.log(db_pass);
   res.send("Hello World!");
 })
 
