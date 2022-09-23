@@ -10,8 +10,7 @@ const port =  process.env.PORT || 3000;
 
 const testee = process.env.TEST;
 const db_user = process.env.DB_USER;
-const db_pass = process.env.DB_PASSWORD;
-//encodeURIComponent(
+const db_pass = encodeURIComponent(process.env.DB_PASSWORD);
 
 const {
   scrapNumJogos,
@@ -88,14 +87,18 @@ app.post('/del',(req, res) => {
 
 app.get('/find',(req,res) => {
   //criar rota que carrega os dados do DB
+  try {
+    
+    
+    res.status(200).json(games);
+
+  } catch (error) {
+    res.status(500).json({error: error})
+  }
 })
 
 app.get('/', (req, res)=>{
-  console.log(testee);
-  console.log(db_user);
-  console.log(db_pass);
-
-  res.send("Hello World! 22");
+  res.send("Hello World!");
 })
 
 
@@ -106,14 +109,3 @@ mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mon
   }).catch((error)=>{
     console.log(error);
   })
-/*
-mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
-.then(() => {
-    console.log('conectamos!');
-  })
-  .catch((error) => {
-    console.log('ERRO:');
-    console.log(error);
-  })
-  */
-
