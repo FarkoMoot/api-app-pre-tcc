@@ -11,6 +11,8 @@ const port =  process.env.PORT || 3000;
 const db_user = process.env.DB_USER;
 const db_pass = encodeURIComponent(process.env.DB_PASSWORD);
 
+const GamesDay = require('./model/GameDay.js');
+
 const {
   scrapNumJogos,
   scrapingSoccerStats_1,
