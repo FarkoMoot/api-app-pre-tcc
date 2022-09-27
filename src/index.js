@@ -74,7 +74,8 @@ app.get('/add', async (req, res) => {
     }
 
     //escrever isso no DB agora
-    await res.json(dados);
+    await GamesDay.create(dados);
+    await res.json('Deu Certo');
     console.log('deu certo');
 
   } catch (error) {
@@ -104,10 +105,7 @@ app.get('/', (req, res)=>{
   res.send("Hello World222!");
 })
 
-const DB_USER = 'FarkoAdm'
-const DB_PASSWORD = 'jXhS5X8Apffw9wHk'
-
-mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
 .then(()=>{
     console.log("Conectamos!!!");
     app.listen(port);
