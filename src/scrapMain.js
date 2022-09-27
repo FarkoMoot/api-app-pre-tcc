@@ -26,28 +26,27 @@ async function scrapNumJogos() {
   //console.log(infoPreScraping.numJogos);
 
   
-  //await browser.close();
+  await browser.close();
   return infoPreScraping.numJogos;
 
 }
 
 async function scrapingSoccerStats_1() {
-  /**const browser = await puppeteer.launch({
+  const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox']
   });
   const page =  await browser.newPage();
   await page.goto(BASE_URL);
-  **/
-
+  
   await page.waitForSelector('#btable');
 
   const infosPage = await page.evaluate( () => {
-    console.log('66');
+    
     var text1 = 'tbody > tr:nth-child(' + 2 + ') > td:nth-child(3) > a > div > font';
     var text2 = 'tbody > tr:nth-child(' + 2 + ') > td:nth-child(2) > a';
     var text3 = 'tbody > tr:nth-child(' + 2 + ') > td:nth-child(4) > a';
-    console.log('6');
+    
     return {
       //pegar o numero de filhos da tabela e rodar um for pra pegar a lista de jogos por inteira
       item1: document.querySelectorAll('#btable').item(7).querySelector(text1).innerHTML,         

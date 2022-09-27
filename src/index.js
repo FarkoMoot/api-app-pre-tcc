@@ -24,17 +24,18 @@ const {
 } = require('./scrapMain.js');
 //const scrapingSoccerStats = require('./scrapMain.js');
 
-app.post('/add', async (req, res) => {
+app.get('/add', async (req, res) => {
   try {
     var dados = [];
-    var dados1, dados2, dados3, dados4, dados5, dados6, dados7, dados8;
+    var dados2, dados3, dados4, dados5, dados6, dados7, dados8;
     console.log('step1');
     const numJogos = await scrapNumJogos();
     console.log('step2');
+    console.log(numJogos);
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
         console.log('step3');
-        dados1 = await scrapingSoccerStats_1();
+        var dados1 = await scrapingSoccerStats_1();
       }else if( c == 2){
         dados2 = await scrapingSoccerStats_2();
       }else if( c == 3){
@@ -100,11 +101,13 @@ app.get('/find',async (req,res) => {
 })
 
 app.get('/', (req, res)=>{
-  res.send("Hello World!");
+  res.send("Hello World222!");
 })
 
+const DB_USER = 'FarkoAdm'
+const DB_PASSWORD = 'jXhS5X8Apffw9wHk'
 
-mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
 .then(()=>{
     console.log("Conectamos!!!");
     app.listen(port);
