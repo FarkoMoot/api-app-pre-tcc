@@ -11,7 +11,7 @@ const port =  process.env.PORT || 3000;
 const db_user = process.env.DB_USER;
 const db_pass = encodeURIComponent(process.env.DB_PASSWORD);
 
-const GamesDay = require('./model/GameDay.js');
+const GameDay = require('./model/GameDay.js');
 
 const {
   scrapNumJogos,
@@ -76,7 +76,7 @@ app.get('/add', async (req, res) => {
     }
 
     //escrever isso no DB agora
-    await GamesDay.create(dados);
+    await GameDay.create(dados);
     await res.json('Deu Certo');
     console.log('deu certo');
 
