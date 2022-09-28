@@ -54,7 +54,7 @@ app.get('/add', async (req, res) => {
         dados8 = await scrapingSoccerStats_8();
       }
     }
-
+    await res.json('QAUSE Deu Certo111111');
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
         dados.push(dados1);
@@ -76,6 +76,7 @@ app.get('/add', async (req, res) => {
     }
 
     //escrever isso no DB agora
+    await res.json('QAUSE Deu Certo222222');
     await GameDay.create(dados);
     await res.json('Deu Certo');
     console.log('deu certo');
