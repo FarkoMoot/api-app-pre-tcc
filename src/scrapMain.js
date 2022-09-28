@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const BASE_URL = "https://www.soccerstats.com/latest.asp?league=brazil"
+const BASE_URL = "https://www.soccerstats.com/latest.asp?league=brazil2"
 
 
 async function scrapNumJogos() {
