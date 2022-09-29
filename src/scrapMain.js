@@ -10,8 +10,9 @@ async function scrapNumJogos() {
   });
   const page = await browser.newPage();
   await page.goto(BASE_URL);
+  
   await page.waitForSelector('#btable');
-  console.log('Entrou no Scrap que busca o numero de JOGOs');
+
   const infoPreScraping = await page.evaluate( () => {
     return {
       //pega o numero de children do table que estao os jogos
@@ -34,7 +35,7 @@ async function scrapingSoccerStats_1() {
   await page.goto(BASE_URL);
   
   await page.waitForSelector('#btable');
-  console.log("entrou no Scrap que busca as INFOS de CADA jogo - JOGO 1:");
+
   const infosPage = await page.evaluate( () => {
     
     var text1 = 'tbody > tr:nth-child(' + 2 + ') > td:nth-child(3) > a > div > font';
@@ -65,17 +66,6 @@ async function scrapingSoccerStats_1() {
     item3
   }
 
-  //criar objeto pra receber os valores do scraping 
-  //passar o objeto pra API
-  //escrever o ou OS objetos no DB
-
-  //activity indicator na tela inicial e na tela de tabela do app
-
-  //colocar pra escrever direto no DB ATLAS\
-  console.log("Valores que recebemos do scrap",infosPage);  
-  console.log("Valores que vao sair do Scrap(RETURN)",expor);  
-  const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
-  //await writeDB(textExit);
   await browser.close();
   return expor;
 }
@@ -91,11 +81,11 @@ async function scrapingSoccerStats_2() {
   await page.waitForSelector('#btable');
 
   const infosPage = await page.evaluate( () => {
-    console.log('66');
+
     var text1 = 'tbody > tr:nth-child(' + 3 + ') > td:nth-child(3) > a > div > font';
     var text2 = 'tbody > tr:nth-child(' + 3 + ') > td:nth-child(2) > a';
     var text3 = 'tbody > tr:nth-child(' + 3 + ') > td:nth-child(4) > a';
-    console.log('6');
+    
     return {
       item1: document.querySelectorAll('#btable').item(7).querySelector(text1).innerHTML,         
       item2: document.querySelectorAll('#btable').item(7).querySelector(text2).innerHTML,         
@@ -108,8 +98,7 @@ async function scrapingSoccerStats_2() {
     item2,
     item3
   }
-  console.log(infosPage);  
-  const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
+  
   await browser.close();
   return expor;
 }
@@ -125,11 +114,11 @@ async function scrapingSoccerStats_3() {
   await page.waitForSelector('#btable');
 
   const infosPage = await page.evaluate( () => {
-    console.log('66');
+    
     var text1 = 'tbody > tr:nth-child(' + 4 + ') > td:nth-child(3) > a > div > font';
     var text2 = 'tbody > tr:nth-child(' + 4 + ') > td:nth-child(2) > a';
     var text3 = 'tbody > tr:nth-child(' + 4 + ') > td:nth-child(4) > a';
-    console.log('6');
+    
     return {
       item1: document.querySelectorAll('#btable').item(7).querySelector(text1).innerHTML,         
       item2: document.querySelectorAll('#btable').item(7).querySelector(text2).innerHTML,         
@@ -142,8 +131,7 @@ async function scrapingSoccerStats_3() {
     item2,
     item3
   }
-  console.log(infosPage);  
-  const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
+  
   await browser.close();
   return expor;
 }
@@ -159,11 +147,11 @@ async function scrapingSoccerStats_4() {
   await page.waitForSelector('#btable');
 
   const infosPage = await page.evaluate( () => {
-    console.log('66');
+
     var text1 = 'tbody > tr:nth-child(' + 5 + ') > td:nth-child(3) > a > div > font';
     var text2 = 'tbody > tr:nth-child(' + 5 + ') > td:nth-child(2) > a';
     var text3 = 'tbody > tr:nth-child(' + 5 + ') > td:nth-child(4) > a';
-    console.log('6');
+    
     return {
       item1: document.querySelectorAll('#btable').item(7).querySelector(text1).innerHTML,         
       item2: document.querySelectorAll('#btable').item(7).querySelector(text2).innerHTML,         
@@ -176,8 +164,7 @@ async function scrapingSoccerStats_4() {
     item2,
     item3
   }
-  console.log(infosPage);  
-  const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
+   
   await browser.close();
   return expor;
 }
@@ -193,11 +180,11 @@ async function scrapingSoccerStats_5() {
   await page.waitForSelector('#btable');
 
   const infosPage = await page.evaluate( () => {
-    console.log('66');
+    
     var text1 = 'tbody > tr:nth-child(' + 6 + ') > td:nth-child(3) > a > div > font';
     var text2 = 'tbody > tr:nth-child(' + 6 + ') > td:nth-child(2) > a';
     var text3 = 'tbody > tr:nth-child(' + 6 + ') > td:nth-child(4) > a';
-    console.log('6');
+    
     return {
       item1: document.querySelectorAll('#btable').item(7).querySelector(text1).innerHTML,         
       item2: document.querySelectorAll('#btable').item(7).querySelector(text2).innerHTML,         
@@ -210,8 +197,7 @@ async function scrapingSoccerStats_5() {
     item2,
     item3
   }
-  console.log(infosPage);  
-  const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
+    
   await browser.close();
   return expor;
 }
@@ -227,11 +213,11 @@ async function scrapingSoccerStats_6() {
   await page.waitForSelector('#btable');
 
   const infosPage = await page.evaluate( () => {
-    console.log('66');
+    
     var text1 = 'tbody > tr:nth-child(' + 7 + ') > td:nth-child(3) > a > div > font';
     var text2 = 'tbody > tr:nth-child(' + 7 + ') > td:nth-child(2) > a';
     var text3 = 'tbody > tr:nth-child(' + 7 + ') > td:nth-child(4) > a';
-    console.log('6');
+    
     return {
       item1: document.querySelectorAll('#btable').item(7).querySelector(text1).innerHTML,         
       item2: document.querySelectorAll('#btable').item(7).querySelector(text2).innerHTML,         
@@ -244,8 +230,8 @@ async function scrapingSoccerStats_6() {
     item2,
     item3
   }
-  console.log(infosPage);  
-  const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
+  
+  
   await browser.close();
   return expor;
 }
@@ -261,11 +247,11 @@ async function scrapingSoccerStats_7() {
   await page.waitForSelector('#btable');
 
   const infosPage = await page.evaluate( () => {
-    console.log('66');
+    
     var text1 = 'tbody > tr:nth-child(' + 8 + ') > td:nth-child(3) > a > div > font';
     var text2 = 'tbody > tr:nth-child(' + 8 + ') > td:nth-child(2) > a';
     var text3 = 'tbody > tr:nth-child(' + 8 + ') > td:nth-child(4) > a';
-    console.log('6');
+    
     return {
       item1: document.querySelectorAll('#btable').item(7).querySelector(text1).innerHTML,         
       item2: document.querySelectorAll('#btable').item(7).querySelector(text2).innerHTML,         
@@ -278,8 +264,7 @@ async function scrapingSoccerStats_7() {
     item2,
     item3
   }
-  console.log(infosPage);  
-  const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
+    
   await browser.close();
   return expor;
 }
@@ -295,11 +280,11 @@ async function scrapingSoccerStats_8() {
   await page.waitForSelector('#btable');
 
   const infosPage = await page.evaluate( () => {
-    console.log('66');
+    
     var text1 = 'tbody > tr:nth-child(' + 9 + ') > td:nth-child(3) > a > div > font';
     var text2 = 'tbody > tr:nth-child(' + 9 + ') > td:nth-child(2) > a';
     var text3 = 'tbody > tr:nth-child(' + 9 + ') > td:nth-child(4) > a';
-    console.log('6');
+    
     return {
       item1: document.querySelectorAll('#btable').item(7).querySelector(text1).innerHTML,         
       item2: document.querySelectorAll('#btable').item(7).querySelector(text2).innerHTML,         
@@ -312,8 +297,7 @@ async function scrapingSoccerStats_8() {
     item2,
     item3
   }
-  console.log(infosPage);  
-  const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
+  
   await browser.close();
   return expor;
 }

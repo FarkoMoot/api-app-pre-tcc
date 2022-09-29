@@ -30,7 +30,6 @@ app.get('/add', async (req, res) => {
   var dados = [];
   var dados2, dados3, dados4, dados5, dados6, dados7, dados8;
     const numJogos = await scrapNumJogos();
-    console.log('este e o numero de jogo, recebido do Scrap 1',numJogos);
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
         var dados1 = await scrapingSoccerStats_1();
@@ -71,9 +70,6 @@ app.get('/add', async (req, res) => {
       }
     }
 
-    //escrever isso no DB agora
-    //console.log(dados);
-
   try {
     
     await GameDay.create(dados)
@@ -81,13 +77,14 @@ app.get('/add', async (req, res) => {
 
   } catch (error) {
     res.json(error);
-    console.log("error");
   }
 
 })
 
-app.post('/del',(req, res) => {
+app.post('/del',async (req, res) => {
   //criar rote que deleta o conteudo do DB
+  await GameDay.deleteMany()
+  res.status(200).json('deu certo')
 })
 
 app.get('/findStart',async (req,res) => {
@@ -103,7 +100,7 @@ app.get('/findStart',async (req,res) => {
 })
 
 app.get('/', (req, res)=>{
-  res.send("Hello World222!");
+  res.send("Hello World!");
 })
 
 mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
