@@ -1,21 +1,17 @@
 const puppeteer = require('puppeteer');
 
-const BASE_URL = "https://www.soccerstats.com/latest.asp?league=brazil2"
+const BASE_URL = "https://www.soccerstats.com/latest.asp?league=brazil"
 
 
 async function scrapNumJogos() {
-  console.log('step99');
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox']
   });
-  console.log('step999');
   const page = await browser.newPage();
-  console.log('step9999');
   await page.goto(BASE_URL);
-  console.log('step99999');
   await page.waitForSelector('#btable');
-  console.log('step100');
+  console.log('Entrou no Scrap que busca o numero de JOGOs');
   const infoPreScraping = await page.evaluate( () => {
     return {
       //pega o numero de children do table que estao os jogos
@@ -24,8 +20,6 @@ async function scrapNumJogos() {
   }); 
   
   //console.log(infoPreScraping.numJogos);
-
-  
   await browser.close();
   return infoPreScraping.numJogos;
 
@@ -40,7 +34,7 @@ async function scrapingSoccerStats_1() {
   await page.goto(BASE_URL);
   
   await page.waitForSelector('#btable');
-
+  console.log("entrou no Scrap que busca as INFOS de CADA jogo - JOGO 1:");
   const infosPage = await page.evaluate( () => {
     
     var text1 = 'tbody > tr:nth-child(' + 2 + ') > td:nth-child(3) > a > div > font';
@@ -64,9 +58,7 @@ async function scrapingSoccerStats_1() {
     }
   });
 
-  console.log('7');
   const { item1 , item2, item3 } = infosPage
-
   const expor = {
     item1,
     item2,
@@ -80,7 +72,8 @@ async function scrapingSoccerStats_1() {
   //activity indicator na tela inicial e na tela de tabela do app
 
   //colocar pra escrever direto no DB ATLAS\
-  console.log(infosPage);  
+  console.log("Valores que recebemos do scrap",infosPage);  
+  console.log("Valores que vao sair do Scrap(RETURN)",expor);  
   const textExit = '{ "item1": "' + infosPage.item1 + '", "item2": "' + infosPage.item2 + '", "item3": "'+ infosPage.item3 + '" },'
   //await writeDB(textExit);
   await browser.close();

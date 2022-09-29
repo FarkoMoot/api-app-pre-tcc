@@ -11,7 +11,7 @@ const port =  process.env.PORT || 3000;
 const db_user = process.env.DB_USER;
 const db_pass = encodeURIComponent(process.env.DB_PASSWORD);
 
-const GameDay = require('./model/GameDay.js');
+const { GameDay } = require('./model/GameDay.js');
 
 const {
   scrapNumJogos,
@@ -27,16 +27,12 @@ const {
 //const scrapingSoccerStats = require('./scrapMain.js');
 
 app.get('/add', async (req, res) => {
-  try {
-    var dados = [];
-    var dados2, dados3, dados4, dados5, dados6, dados7, dados8;
-    console.log('step1');
+  var dados = [];
+  var dados2, dados3, dados4, dados5, dados6, dados7, dados8;
     const numJogos = await scrapNumJogos();
-    console.log('step2');
-    console.log(numJogos);
+    console.log('este e o numero de jogo, recebido do Scrap 1',numJogos);
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
-        console.log('step3');
         var dados1 = await scrapingSoccerStats_1();
       }else if( c == 2){
         dados2 = await scrapingSoccerStats_2();
@@ -54,7 +50,7 @@ app.get('/add', async (req, res) => {
         dados8 = await scrapingSoccerStats_8();
       }
     }
-    await res.json('QAUSE Deu Certo111111');
+    
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
         dados.push(dados1);
@@ -76,10 +72,12 @@ app.get('/add', async (req, res) => {
     }
 
     //escrever isso no DB agora
-    await res.json('QAUSE Deu Certo222222');
-    await GameDay.create(dados);
+    //console.log(dados);
+
+  try {
+    
+    await GameDay.create(dados)
     await res.json('Deu Certo');
-    console.log('deu certo');
 
   } catch (error) {
     res.json(error);
@@ -92,13 +90,13 @@ app.post('/del',(req, res) => {
   //criar rote que deleta o conteudo do DB
 })
 
-app.get('/find',async (req,res) => {
+app.get('/findStart',async (req,res) => {
   //criar rota que carrega os dados do DB
   try {
+    const recebeDados = await GameDay.find()
+    //console.log(recebeDados[0]);
+    res.status(200).json(recebeDados);
     
-    
-    res.status(200).json();
-
   } catch (error) {
     res.status(500).json({error: error})
   }
