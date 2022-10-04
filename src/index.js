@@ -12,6 +12,9 @@ const db_user = process.env.DB_USER;
 const db_pass = encodeURIComponent(process.env.DB_PASSWORD);
 
 const { GameDay } = require('./model/GameDay.js');
+const { GameStats } = require('./model/GameStats.js');
+
+const { getLink, resolveLinkCorner, scrapStats, scrapCorner } = require('./scrapStats.js');
 
 const {
   scrapNumJogos,
@@ -24,7 +27,6 @@ const {
   scrapingSoccerStats_7,
   scrapingSoccerStats_8,
 } = require('./scrapMain.js');
-//const scrapingSoccerStats = require('./scrapMain.js');
 
 app.get('/add', async (req, res) => {
   var dados = [];
@@ -71,7 +73,7 @@ app.get('/add', async (req, res) => {
     }
 
   try {
-    
+  
     await GameDay.create(dados)
     await res.json('Deu Certo');
 
@@ -81,22 +83,52 @@ app.get('/add', async (req, res) => {
 
 })
 
+app.get('/addStats', async (req, res) => {
+  const recebeDados = await GameDay.find();
+  var b, recebeLINKS = []
+  for (var i in recebeDados) {
+   
+    b = await getLink(recebeDados[i].item2, recebeDados[i].item3);
+
+    recebeLINKS.push(b);
+  }
+
+  var c , recebeDadosCorner = [];
+  for(var i in recebeLINKS){
+    c = await scrapCorner(recebeLINKS[i].linkCorner_time1);
+    recebeDadosCorner.push(c)
+  }
+
+  for(var i in recebeDadosCorner){
+    recebeDadosCorner[i].timeCasa.push(recebeDados[i].item2)
+    recebeDadosCorner[i].timeVisitante.push(recebeDados[i].item3)
+  }
+
+  await GameStats.create(recebeDadosCorner);
+
+})
+
 app.post('/del',async (req, res) => {
-  //criar rote que deleta o conteudo do DB
   await GameDay.deleteMany()
   res.status(200).json('deu certo')
 })
 
 app.get('/findStart',async (req,res) => {
-  //criar rota que carrega os dados do DB
   try {
-    const recebeDados = await GameDay.find()
-    //console.log(recebeDados[0]);
+    const recebeDados = await GameDay.find();
     res.status(200).json(recebeDados);
-    
   } catch (error) {
     res.status(500).json({error: error})
   }
+})
+
+app.get('/teste', async (req, res)=>{
+  const a = 'https://www.soccerstats.com/team.asp?league=brazil&stats=20-bragantino'
+
+  await GameStats.deleteMany();
+
+  res.json('apagou tudo')
+
 })
 
 app.get('/', (req, res)=>{
@@ -105,8 +137,8 @@ app.get('/', (req, res)=>{
 
 mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
 .then(()=>{
-    console.log("Conectamos!!!");
     app.listen(port);
+    console.log("Conectamos!!!");
   }).catch((error)=>{
     console.log(error);
   })
