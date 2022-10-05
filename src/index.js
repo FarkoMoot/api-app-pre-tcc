@@ -113,11 +113,19 @@ app.post('/del',async (req, res) => {
   res.status(200).json('deu certo')
 })
 
-app.get('/findStart',async (req,res) => {
+app.post('/findStats', async (req, res)=>{
+
+  const { _time1 } = req.body
+  console.log(_time1)
+  
   try {
-    const recebeDados = await GameDay.find();
+    //{ 'time1': _time1 }
+    //{ _id:'633d864ae3ac11b992791281' }
+    //{ 'time1': 'Juventude' }
+    var recebeDados = await GameStats.find()
     res.status(200).json(recebeDados);
   } catch (error) {
+    console.log('passou aq2');
     res.status(500).json({error: error})
   }
 })
