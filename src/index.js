@@ -122,7 +122,7 @@ app.post('/findStats', async (req, res)=>{
     //{ 'time1': _time1 }
     //{ _id:'633d864ae3ac11b992791281' }
     //{ 'time1': 'Juventude' }
-    var recebeDados = await GameStats.find()
+    var recebeDados = await GameStats.find({ 'time1': _time1 })
     res.status(200).json(recebeDados);
   } catch (error) {
     console.log('passou aq2');
