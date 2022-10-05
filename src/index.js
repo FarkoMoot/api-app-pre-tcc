@@ -147,11 +147,9 @@ app.get('/', (req, res)=>{
   res.send("Hello World!");
 })
 
-const DB_USER = 'FarkoAdm'
-const DB_PASSWORD = 'jXhS5X8Apffw9wHk'
-mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
 .then(()=>{
-    app.listen(3000);
+    app.listen(port);
     console.log("Conectamos!!!");
   }).catch((error)=>{
     console.log(error);
