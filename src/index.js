@@ -123,12 +123,13 @@ app.get('/findStart',async (req,res) => {
 })
 
 app.post('/findStats', async (req, res)=>{
+  try{
   const { time1 } = req.body
   console.log(req.body)
   //console.log(req.body._time1)
   console.log(time1);
   
-  try {
+  //try {
   //{ 'time1': _time1 }
   //{ _id:'633d864ae3ac11b992791281' }
   //{ 'time1': 'Juventude' }
