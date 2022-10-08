@@ -124,17 +124,14 @@ app.get('/findStart',async (req,res) => {
 
 app.post('/findStats', async (req, res)=>{
   try{
-  const { time1 } = req.body
-  console.log(req.body)
-  //console.log(req.body._time1)
-  console.log(time1);
-  
-  //try {
-  //{ 'time1': _time1 }
-  //{ _id:'633d864ae3ac11b992791281' }
-  //{ 'time1': 'Juventude' }
-  const recebeDados = await GameStats.findOne({ "time1": time1 })
-  res.status(200).json(recebeDados);
+    const { _time1 } = req.body
+
+    //{ 'time1': _time1 }
+    //{ _id:'633d864ae3ac11b992791281' }
+    //{ 'time1': 'Juventude' }
+    const recebeDados = await GameStats.findOne({ 'time1': _time1});    
+    
+    res.status(200).json(recebeDados);
   } catch (error) {
     res.status(500).json({error: error})
   }
@@ -147,10 +144,11 @@ app.get('/teste', async (req, res)=>{
 app.get('/', (req, res)=>{
   res.send("Hello World!");
 })
-
-mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
+const DB_USER = 'FarkoAdm'
+const DB_PASSWORD = 'jXhS5X8Apffw9wHk'
+mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
 .then(()=>{
-    app.listen(port);
+    app.listen(3000);
     console.log("Conectamos!!!");
   }).catch((error)=>{
     console.log(error);
