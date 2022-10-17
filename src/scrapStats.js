@@ -244,7 +244,7 @@ async function scrapStats(link_time) {
 
 }
 
-async function scrapCorner(link_time) {
+async function scrapCorner(link_time,time1,time2) {
   const browser = await puppeterr.launch({
     headless: true,
     args: ['--no-sandbox']
@@ -291,20 +291,27 @@ async function scrapCorner(link_time) {
       timeVisitante.push(recebeCornerContra2[i]);
     }
 
+    
     //console.log(timeCasa, 'scrap');
     const exp = {
       timeCasa,
       timeVisitante
     }
-
+    
     return {
-      exp
+      timeCasa,
+      timeVisitante
     }
-  });
-  
-  
+    console.log('asdasdsadasdasdsad');
+  }
+);
+  const expor = {
+    time1,
+    time2,
+    receInfos
+  }
   await browser.close();
-  return(receInfos.exp);
+  return(expor);
 
 }
 

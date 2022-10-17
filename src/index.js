@@ -31,7 +31,9 @@ const {
 app.get('/add', async (req, res) => {
   var dados = [];
   var dados2, dados3, dados4, dados5, dados6, dados7, dados8;
+  console.log('1')
     const numJogos = await scrapNumJogos();
+    console.log('2')
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
         var dados1 = await scrapingSoccerStats_1();
@@ -51,6 +53,7 @@ app.get('/add', async (req, res) => {
         dados8 = await scrapingSoccerStats_8();
       }
     }
+    console.log('3')
     
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
@@ -85,6 +88,7 @@ app.get('/add', async (req, res) => {
 
 app.get('/addStats', async (req, res) => {
   const recebeDados = await GameDay.find();
+  console.log(recebeDados.item2)
   var b, recebeLINKS = []
   for (var i in recebeDados) {
    
@@ -92,24 +96,30 @@ app.get('/addStats', async (req, res) => {
 
     recebeLINKS.push(b);
   }
-
+  console.log(recebeLINKS)
   var c , recebeDadosCorner = [];
   for(var i in recebeLINKS){
-    c = await scrapCorner(recebeLINKS[i].linkCorner_time1);
+    c = await scrapCorner(recebeLINKS[i].linkCorner_time1,recebeDados[i].item2, recebeDados[i].item3);
     recebeDadosCorner.push(c)
   }
+  console.log(recebeDadosCorner)
 
+  /*
   for(var i in recebeDadosCorner){
     recebeDadosCorner[i].timeCasa.push(recebeDados[i].item2)
     recebeDadosCorner[i].timeVisitante.push(recebeDados[i].item3)
   }
+  console.log(recebeDadosCorner)
+  */
 
   await GameStats.create(recebeDadosCorner);
+  res.status(200).json('deucerto');
 
 })
 
 app.post('/del',async (req, res) => {
   await GameDay.deleteMany()
+  await GameStats.deleteMany()
   res.status(200).json('deu certo')
 })
 
