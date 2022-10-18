@@ -7,12 +7,16 @@ const app = express();
 app.use(express.json());
 
 const port =  process.env.PORT || 3000;
-
 const db_user = process.env.DB_USER;
 const db_pass = encodeURIComponent(process.env.DB_PASSWORD);
 
 const { GameDay } = require('./model/GameDay.js');
+
+const { GameLast5 } = require('./model/GameLast5.js');
+
 const { GameStats } = require('./model/GameStats.js');
+
+const { getGoals, lastMatchs } = require('./scrapGoals.js');
 
 const { getLink, resolveLinkCorner, scrapStats, scrapCorner } = require('./scrapStats.js');
 
@@ -90,13 +94,14 @@ app.get('/addStats', async (req, res) => {
   const recebeDados = await GameDay.find();
   console.log(recebeDados.item2)
   var b, recebeLINKS = []
-  for (var i in recebeDados) {
-   
-    b = await getLink(recebeDados[i].item2, recebeDados[i].item3);
 
-    recebeLINKS.push(b);
+  for (var i in recebeDados) {
+    b = await getLink(recebeDados[i].item2, recebeDados[i].item3);
+    recebeLINKS.push(b.linkCorner_time1);
   }
+
   console.log(recebeLINKS)
+
   var c , recebeDadosCorner = [];
   for(var i in recebeLINKS){
     c = await scrapCorner(recebeLINKS[i].linkCorner_time1,recebeDados[i].item2, recebeDados[i].item3);
@@ -120,6 +125,7 @@ app.get('/addStats', async (req, res) => {
 app.post('/del',async (req, res) => {
   await GameDay.deleteMany()
   await GameStats.deleteMany()
+  await GameLast5.deleteMany()
   res.status(200).json('deu certo')
 })
 
@@ -153,6 +159,65 @@ app.get('/teste', async (req, res)=>{
 
 app.get('/', (req, res)=>{
   res.send("Hello World!");
+})
+
+app.get( '/addLast', async (req, res) => {
+  console.log('start');
+  //pega link de cada time
+  const recebeDados = await GameDay.find()
+  var b, recebelinks = [], recebeTimes = [];
+  console.log('asdasdads');
+  for (var i in recebeDados) {
+    b = await getLink(recebeDados[i].item2, recebeDados[i].item3);
+    recebelinks.push(b.linkFsStats_time1)
+    recebelinks.push(b.linkFsStats_time2)
+    recebeTimes.push(recebeDados[i].item2)
+    recebeTimes.push(recebeDados[i].item3)
+  }
+
+  //console.log(recebelinks.length);
+
+  var recebe_last_casa = [], recebe_last_visitante = []
+  for ( var c = 0; c < recebelinks.length ; c = c + 2 ){
+    console.log('asdasdsadasdasdasdasdasdasdasdsadasdas')
+    const last_5games_Casa = await lastMatchs(recebelinks[c], recebeTimes[c])
+    const last_5games_Visitante = await lastMatchs(recebelinks[c+1], recebeTimes[c+1])
+    recebe_last_casa.push(last_5games_Casa)
+    recebe_last_visitante.push(last_5games_Visitante)
+  }
+
+  var recebePraExpor = []
+  for (var i in recebe_last_casa) {
+    const time1 = recebeDados[i].item2
+    const time2 = recebeDados[i].item3
+    const timeCasa = recebe_last_casa[i].recebeHere
+    const timeVisitante = recebe_last_visitante[i].recebeHere
+    const p = {
+      time1,
+      time2,
+      timeCasa,
+      timeVisitante
+    }
+    recebePraExpor.push(p)
+  }
+
+  console.log(recebePraExpor);
+
+  await GameLast5.create(recebePraExpor)
+
+  res.status(200).json('deu certo!')
+})
+
+app.get('/findLast', async (req, res) => {
+  try{
+
+    const { _time1 } = req.body
+    const recebeDados = await GameLast5.findOne({ 'time1': _time1});
+    
+    res.status(200).json(recebeDados);
+  } catch (error) {
+    res.status(500).json({error: error})
+  }
 })
 
 mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)

@@ -3,6 +3,7 @@ const puppeterr = require('puppeteer')
 async function getLink(time1, time2) {
   var linkCorner_time1, linkCorner_time2;
   var linkStats_time1, linkStats_time2;
+  var linkFsStats_time1, linkFsStats_time2;
 
   /* LINKs
     https://www.soccerstats.com/team.asp?league=brazil&stats=16-athletico-pr
@@ -18,127 +19,167 @@ async function getLink(time1, time2) {
 
     if(time1 == 'Atletico MG'){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/808';
-      linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=9-atletico-mg'
+      linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=9-atletico-mg';
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,atletico-mineiro,175.php'
     }else if( time1 == 'Avai' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/1128'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=17-avai'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,avai,177.php';
     }else if( time1 == 'Fluminense' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/817'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=1-fluminense'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,fluminense,183.php'
     }else if( time1 == 'Atletico GO' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/9047'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=3-atletico-go'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,atletico-goianiense,192.php'
     }else if( time1 == 'Athletico PR' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/51412'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=16-athletico-pr'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,atletico-paranaense,176.php'
     }else if( time1 == 'Juventude' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/2179'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=19-juventude'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,juventude,3781.php'
     }else if( time1 == 'Flamengo' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/800'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=4-flamengo'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,flamengo,182.php'
     }else if( time1 == 'Bragantino' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/803'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=20-bragantino'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,bragantino,199.php'
     }else if( time1 == 'Goias' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/818'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=8-goias'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,goias,184.php'
     }else if( time1 == 'Fortaleza' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/927'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=13-fortaleza'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,fortaleza-ec,2640.php'
     }else if( time1 == 'Ceara' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/798'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=6-ceara'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,ceara,190.php'
     }else if( time1 == 'America MG' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/1098'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=18-america-mg'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,america-mineiro,195.php'
     }else if( time1 == 'Internacional' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/964'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=10-internacional'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,internacional,187.php'
     }else if( time1 == 'Santos' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/806'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=2-santos'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,santos,191.php'
     }else if( time1 == 'Botafogo' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/1497'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=11-botafogo'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,botafogo,178.php'
     }else if( time1 == 'Palmeiras' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/807'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=5-palmeiras'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,palmeiras,189.php'
     }else if( time1 == 'Cuiaba' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/4196'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=14-cuiaba'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,cuiaba,2639.php'
     }else if( time1 == 'Coritiba' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/799'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=7-coritiba'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,coritiba,197.php'
     }else if( time1 == 'Sao Paulo' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/814'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=15-sao-paulo'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,sao-paulo,193.php'
     }else if( time1 == 'Corinthians' ){
       linkCorner_time1 = 'https://www.totalcorner.com/team/view/804'
       linkStats_time1 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=12-corinthians'
+      linkFsStats_time1 = 'https://es.fcstats.com/club,estadistica,corinthians,179.php'
     }
   
 
     if(time2 == 'Atletico MG'){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/808';
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=9-atletico-mg'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,atletico-mineiro,175.php'
     }else if( time2 == 'Avai' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/1128'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=17-avai'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,avai,177.php';
     }else if( time2 == 'Fluminense' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/817'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=1-fluminense'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,fluminense,183.php'
     }else if( time2 == 'Atletico GO' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/9047'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=3-atletico-go'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,atletico-goianiense,192.php'
     }else if( time2 == 'Athletico PR' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/51412'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=16-athletico-pr'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,atletico-paranaense,176.php'
     }else if( time2 == 'Juventude' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/2179'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=19-juventude'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,juventude,3781.php'
     }else if( time2 == 'Flamengo' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/800'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=4-flamengo'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,flamengo,182.php'
     }else if( time2 == 'Bragantino' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/803'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=20-bragantino'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,bragantino,199.php'
     }else if( time2 == 'Goias' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/818'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=8-goias'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,goias,184.php'
     }else if( time2 == 'Fortaleza' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/927'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=13-fortaleza'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,fortaleza-ec,2640.php'
     }else if( time2 == 'Ceara' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/798'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=6-ceara'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,ceara,190.php'
     }else if( time2 == 'America MG' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/1098'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=18-america-mg'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,america-mineiro,195.php'
     }else if( time2 == 'Internacional' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/964'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=10-internacional'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,internacional,187.php'
     }else if( time2 == 'Santos' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/806'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=2-santos'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,santos,191.php'
     }else if( time2 == 'Botafogo' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/1497'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=11-botafogo'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,botafogo,178.php'
     }else if( time2 == 'Palmeiras' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/807'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=5-palmeiras'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,palmeiras,189.php'
     }else if( time2 == 'Cuiaba' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/4196'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=14-cuiaba'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,cuiaba,2639.php'
     }else if( time2 == 'Coritiba' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/799'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=7-coritiba'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,coritiba,197.php'
     }else if( time2 == 'Sao Paulo' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/814'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=15-sao-paulo'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,sao-paulo,193.php'
     }else if( time2 == 'Corinthians' ){
       linkCorner_time2 = 'https://www.totalcorner.com/team/view/804'
       linkStats_time2 = 'https://www.soccerstats.com/team.asp?league=brazil&stats=12-corinthians'
+      linkFsStats_time2 = 'https://es.fcstats.com/club,estadistica,corinthians,179.php'
     }
 
 
@@ -150,9 +191,9 @@ async function getLink(time1, time2) {
     linkCorner_time1 = a;
     //linkCorner_time2 = b;
 
-
+    
     //const expor = { linkCorner_time1, linkStats_time1, linkStats_time2 }
-    const expor = { linkCorner_time1 }
+    const expor = { linkCorner_time1, linkFsStats_time1, linkFsStats_time2 }
     return expor
 }
 
