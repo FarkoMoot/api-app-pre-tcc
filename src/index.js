@@ -208,7 +208,7 @@ app.get( '/addLast', async (req, res) => {
   res.status(200).json('deu certo!')
 })
 
-app.get('/findLast', async (req, res) => {
+app.post('/findLast', async (req, res) => {
   try{
 
     const { _time1 } = req.body
