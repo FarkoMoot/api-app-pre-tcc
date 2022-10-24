@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer')
 
-async function getGoals(link, time1, time2){
+async function getGoals(link){
   const browser = await puppeteer.launch({
     headless: true,
     args: ['--no-sandbox']
@@ -8,23 +8,50 @@ async function getGoals(link, time1, time2){
   const page = await browser.newPage();
   await page.goto(link);
 
-  await page.waitForSelector('#club-w11 > div.w96.cf.m0Auto > div > div.h2h-tabbed-headers.row.cf > div.header-title.ui-toggle-link-local.ac.w33.fl.active');
-
-  await page.click('#club-w11 > div.w96.cf.m0Auto > div > div.h2h-tabbed-headers.row.cf > div.header-title.ui-toggle-link-local.ac.w33.fl.active');
+  await page.waitForSelector('#sheets-viewport > div:nth-child(1) > div > table > tbody > tr:nth-child(14)'); 
 
   const recebeHere = await page.evaluate(() => {
     return {
-      numGol1: document.querySelector('#goals-10-15-1 > div:nth-child(1) > div > div.mt10 > div:nth-child(1) > div.w60.m0Auto.heatmap_gradient.hover-modal-parent > div > span').innerHTML
+      over1_5: document.querySelector('#sheets-viewport > div:nth-child(1) > div > table > tbody > tr:nth-child(14) > td:nth-child(9)').innerHTML,
+      over2_5: document.querySelector('#sheets-viewport > div:nth-child(1) > div > table > tbody > tr:nth-child(15) > td:nth-child(9)').innerHTML,
+      btts: document.querySelector('#sheets-viewport > div:nth-child(1) > div > table > tbody > tr:nth-child(20) > td:nth-child(9)').innerHTML
+      //numGol2: document.querySelector('#content > div:nth-child(7) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > table:nth-child(9) > tbody > tr:nth-child(1) > td:nth-child(2)').innerHTML
+      //numGol3: document.querySelector('#content > div:nth-child(7) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > table:nth-child(9) > tbody > tr:nth-child(1) > td:nth-child(2)').innerHTML
     }
   }) 
 
-  console.log(recebeHere.numGol1)
-
+  console.log(recebeHere)
+  return recebeHere
   //6x
   //#goals-10-15-1 > div:nth-child(1) > div > div.mt10 > div:nth-child(1) > div.w60.m0Auto.heatmap_gradient.hover-modal-parent > div > span
   //#goals-10-15-1 > div:nth-child(1) > div > div.mt10 > div:nth-child(2) > div.w60.m0Auto.heatmap_gradient.hover-modal-parent > div > span
 
 }
+
+async function getGoals2(link, time){
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
+  const page = await browser.newPage();
+  await page.goto(link);
+
+  await page.waitForSelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(1) > td.bold > div'); 
+  
+  const recebeGOLS = await page.evaluate(() => {
+    return {
+      tempo1_15: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(1) > td.bold ').textContent,
+      tempo15_30: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(2) > td.bold').textContent,
+      tempo30_45: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(3) > td.bold').textContent,
+      tempo45_60: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(4) > td.bold').textContent,
+      tempo60_75: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(5) > td.bold').textContent,
+      tempo75_90: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(6) > td.bold').textContent,
+    }
+  }) 
+
+  return {time,recebeGOLS}
+}
+
 
 async function lastMatchs(link, time){
   const browser = await puppeteer.launch({
@@ -54,4 +81,4 @@ async function lastMatchs(link, time){
   }
 }
 
-module.exports = { getGoals, lastMatchs }
+module.exports = { getGoals, getGoals2, lastMatchs }

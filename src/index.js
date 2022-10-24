@@ -16,7 +16,9 @@ const { GameLast5 } = require('./model/GameLast5.js');
 
 const { GameStats } = require('./model/GameStats.js');
 
-const { getGoals, lastMatchs } = require('./scrapGoals.js');
+const { GameGol } = require('./model/GameGol.js')
+
+const { getGoals, getGoals2, lastMatchs } = require('./scrapGoals.js');
 
 const { getLink, resolveLinkCorner, scrapStats, scrapCorner } = require('./scrapStats.js');
 
@@ -123,9 +125,10 @@ app.get('/addStats', async (req, res) => {
 })
 
 app.post('/del',async (req, res) => {
-  await GameDay.deleteMany()
-  await GameStats.deleteMany()
-  await GameLast5.deleteMany()
+  //await GameDay.deleteMany()
+  //await GameStats.deleteMany()
+  //await GameLast5.deleteMany()
+  await GameGol.deleteMany()
   res.status(200).json('deu certo')
 })
 
@@ -153,8 +156,31 @@ app.post('/findStats', async (req, res)=>{
   }
 })
 
-app.get('/teste', async (req, res)=>{
+app.post('/addGoals', async (req, res)=>{
+  
+  const recebeDados = await GameDay.find()
+  var b, recebelinks = [], recebeTimes = [];
+  for (var i in recebeDados) {
+    b = await getLink(recebeDados[i].item2, recebeDados[i].item3);
+    recebelinks.push(b.linkFut24_1)
+    recebelinks.push(b.linkFut24_2)
+    recebeTimes.push(recebeDados[i].item2)
+    recebeTimes.push(recebeDados[i].item3)
+  }
 
+  //const link = 'https://www.futbol24.com/team/Brazil/Palmeiras-SP/'
+  var recebe1, recebe2, recebe3 = [];
+  for( let c = 0 ; c < recebelinks.length ; c = c + 2 ){
+    recebe1 = await getGoals2(recebelinks[c], recebeTimes[c])
+    recebe2 = await getGoals2(recebelinks[c+1], recebeTimes[c+1])
+    recebe3.push(recebe1)
+    recebe3.push(recebe2)
+  }
+
+  //escrever no db
+  await GameGol.create(recebe3)
+  res.status(200).json('deu certo')
+  //console.log(a)
 })
 
 app.get('/', (req, res)=>{
@@ -213,6 +239,22 @@ app.post('/findLast', async (req, res) => {
 
     const { _time1 } = req.body
     const recebeDados = await GameLast5.findOne({ 'time1': _time1});
+    
+    res.status(200).json(recebeDados);
+  } catch (error) {
+    res.status(500).json({error: error})
+  }
+})
+
+app.post('/teste', async (req, res) => {
+
+})
+
+app.post('/findGoals', async (req, res) => {
+  try{
+
+    const { _time1 } = req.body
+    const recebeDados = await GameGol.findOne({ 'time': _time1});
     
     res.status(200).json(recebeDados);
   } catch (error) {
