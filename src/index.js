@@ -125,9 +125,9 @@ app.get('/addStats', async (req, res) => {
 })
 
 app.post('/del',async (req, res) => {
-  //await GameDay.deleteMany()
-  //await GameStats.deleteMany()
-  //await GameLast5.deleteMany()
+  await GameDay.deleteMany()
+  await GameStats.deleteMany()
+  await GameLast5.deleteMany()
   await GameGol.deleteMany()
   res.status(200).json('deu certo')
 })
