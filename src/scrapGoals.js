@@ -46,8 +46,8 @@ async function getGoals2(link, time){
       tempo45_60: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(4) > td.bold').textContent,
       tempo60_75: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(5) > td.bold').textContent,
       tempo75_90: document.querySelector('#contentleft > div.half2 > div:nth-child(4) > table > tbody > tr:nth-child(6) > td.bold').textContent,
-      gol_off_65: document.querySelector('#contentleft > div.half > div.table2.table3.table5 > table > tbody:nth-child(2) > tr:nth-child(1) > td.bold > div').innerHTML,
-      over_2_gols: document.querySelector('#contentleft > div.half > div:nth-child(2) > table > tbody > tr:nth-child(1) > td.bold > div').innerHTML,
+      gol_off_65: document.querySelector('#contentleft > div.half > div.table2.table3.table5 > table > tbody:nth-child(2) > tr:nth-child(1) > td.bold > div').textContent,
+      over_2_gols: document.querySelector('#contentleft > div.half > div:nth-child(2) > table > tbody > tr:nth-child(1) > td.bold > div').textContent,
     }
   }) 
 
