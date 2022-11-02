@@ -36,13 +36,18 @@ const {
 
 app.get('/add', async (req, res) => {
   var dados = [];
-  var dados2, dados3, dados4, dados5, dados6, dados7, dados8;
-  console.log('1')
+  var dados1, dados2, dados3, dados4, dados5, dados6, dados7, dados8;
+  //console.log('1')
     const numJogos = await scrapNumJogos();
-    console.log('2')
+    //console.log('2')
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
-        //var dados1 = await scrapingSoccerStats_1();
+        //dados1 = await scrapingSoccerStats_1();
+        dados1 = {
+          item1:"00:11",
+          item2:"Sao Paulo",
+          item3:"Atletico MG"
+        }
       }else if( c == 2){
         dados2 = await scrapingSoccerStats_2();
       }else if( c == 3){
@@ -59,11 +64,11 @@ app.get('/add', async (req, res) => {
         dados8 = await scrapingSoccerStats_8();
       }
     }
-    console.log('3')
+    //console.log('3')
     
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
-        //dados.push(dados1);
+        dados.push(dados1);
       }else if( c == 2){
         dados.push(dados2);
       }else if( c == 3){
