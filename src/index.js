@@ -42,7 +42,7 @@ app.get('/add', async (req, res) => {
     console.log('2')
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
-        var dados1 = await scrapingSoccerStats_1();
+        //var dados1 = await scrapingSoccerStats_1();
       }else if( c == 2){
         dados2 = await scrapingSoccerStats_2();
       }else if( c == 3){
@@ -63,7 +63,7 @@ app.get('/add', async (req, res) => {
     
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
-        dados.push(dados1);
+        //dados.push(dados1);
       }else if( c == 2){
         dados.push(dados2);
       }else if( c == 3){
