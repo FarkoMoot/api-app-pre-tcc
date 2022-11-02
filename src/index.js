@@ -99,7 +99,7 @@ app.get('/add', async (req, res) => {
 
 app.get('/addStats', async (req, res) => {
   const recebeDados = await GameDay.find();
-  console.log(recebeDados.item2)
+  //console.log(recebeDados[0].item2)
   var b, recebeLINKS = []
 
   for (var i in recebeDados) {
@@ -111,7 +111,7 @@ app.get('/addStats', async (req, res) => {
 
   var c , recebeDadosCorner = [];
   for(var i in recebeLINKS){
-    c = await scrapCorner(recebeLINKS[i].linkCorner_time1,recebeDados[i].item2, recebeDados[i].item3);
+    c = await scrapCorner(recebeLINKS[i],recebeDados[i].item2, recebeDados[i].item3);
     recebeDadosCorner.push(c)
   }
   console.log(recebeDadosCorner)
