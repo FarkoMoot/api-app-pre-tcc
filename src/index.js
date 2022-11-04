@@ -42,12 +42,13 @@ app.get('/add', async (req, res) => {
     //console.log('2')
     for(var c = 1; c < numJogos; c++ ){
       if( c == 1){
-        //dados1 = await scrapingSoccerStats_1();
+        dados1 = await scrapingSoccerStats_1();
+        /*
         dados1 = {
           item1:"00:11",
           item2:"Sao Paulo",
           item3:"Atletico MG"
-        }
+        }*/
       }else if( c == 2){
         dados2 = await scrapingSoccerStats_2();
       }else if( c == 3){
@@ -216,7 +217,7 @@ app.get( '/addLast', async (req, res) => {
     recebe_last_casa.push(last_5games_Casa)
     recebe_last_visitante.push(last_5games_Visitante)
   }
-
+  console.log('passou 1')
   var recebePraExpor = []
   for (var i in recebe_last_casa) {
     const time1 = recebeDados[i].item2
@@ -232,6 +233,7 @@ app.get( '/addLast', async (req, res) => {
     recebePraExpor.push(p)
   }
 
+  console.log('passou 2')
   console.log(recebePraExpor);
 
   await GameLast5.create(recebePraExpor)
