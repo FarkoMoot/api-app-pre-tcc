@@ -270,9 +270,13 @@ app.post('/findGoals', async (req, res) => {
   }
 })
 
-mongoose.connect(`mongodb+srv://${db_user}:${db_pass}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
+const db_user1 = 'FarkoAdm'
+const db_pass1 = 'jXhS5X8Apffw9wHk'
+
+
+mongoose.connect(`mongodb+srv://${db_user1}:${db_pass1}@clusterfutebol.xfuowcs.mongodb.net/?retryWrites=true&w=majority`)
 .then(()=>{
-    app.listen(port);
+    app.listen(3000);
     console.log("Conectamos!!!");
   }).catch((error)=>{
     console.log(error);
